@@ -1,0 +1,99 @@
+/* General styling for the body */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Styling for the video background */
+  #myVideo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Ensures the video is behind the content */
+    object-fit: cover;
+    /* Ensures the video covers the entire viewport */
+  }
+  
+  /* Container for the overlay content */
+  .bacimg {
+    position: relative;
+    height: 100vh;
+    /* Full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url('../../assets/img/13416124_5228748.jpg'); */
+    background-size: cover;
+    background-position: center;
+  }
+  
+  /* Container for the form */
+  .reg-form {
+    background: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent background */
+    padding: 40px;
+    border-radius: 10px;
+    color: white;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Title styling */
+  .title {
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Form content styling */
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Input box styling */
+  .input-box1 {
+    margin-bottom: 20px;
+  }
+  
+  /* Mat form field full width */
+  .reg-full-width {
+    width: 100%;
+  }
+  
+  /* Button styling */
+  .btnon input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btnon input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Register link styling */
+  .register-link {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .register-link a:hover {
+    text-decoration: underline;
+  }

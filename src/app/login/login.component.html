@@ -1,0 +1,43 @@
+<app-header></app-header>
+<video autoplay muted loop id="myVideo">
+  <source src="../../assets/videos/3205624-hd_1920_1080_25fps.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<div class="bacimg">
+  <!-- Your component content here -->
+  <div class="reg-form">
+    <div class="container-new">
+      <div class="title">Log in now</div>
+      <div class="content">
+        <form [formGroup]="form" (submit)="submit()">
+          <div class="user-details">
+            <div class="input-box1">
+              <mat-form-field class="reg-full-width">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput [formControl]="emailFormControl" placeholder="Ex. pat@example.com">
+                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                  Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="emailFormControl.hasError('required')">
+                  Email is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="input-box1">
+              <mat-form-field class="reg-full-width">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput type="password">
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="btnon">
+            <input type="submit" value="Login">
+          </div>
+          <div class="register-link">
+            You are not a member? <a class="reg-now" routerLink="/register">Register now</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
