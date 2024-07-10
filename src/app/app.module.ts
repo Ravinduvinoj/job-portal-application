@@ -20,6 +20,12 @@ import { provideHttpClient, withFetch } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatInputModule } from '@angular/material/input';
+import { CategoryComponent } from './modules/admin/components/category/category.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgToastModule } from 'ng-angular-popup';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -35,18 +41,22 @@ import { MatInputModule } from '@angular/material/input';
     AdminComponent,
     CompanyComponent,
     AdminDashboardComponent,
-    DashboardComponent
+    DashboardComponent,
+    CategoryComponent
   ],
   imports: [
+    NgToastModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    MatInputModule
-
-    
+    MatInputModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+    ToastrModule.forRoot(),
+  
   ],
   providers: [
     provideClientHydration(),

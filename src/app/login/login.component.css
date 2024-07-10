@@ -97,3 +97,6 @@ body {
   .register-link a:hover {
     text-decoration: underline;
   }
+  mat-form-field {
+    margin-right: 12px;
+  }
