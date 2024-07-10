@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+  
   form!: FormGroup;
   emailFormControl = new FormControl('', [Validators.required, Validators.email]); //check email validation using angular material components
 
@@ -37,8 +38,6 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  submit(): void {
-
-  }
+  submit(): void { }
 
 }
