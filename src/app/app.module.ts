@@ -3,7 +3,6 @@ import { BrowserModule, provideClientHydration } from '@angular/platform-browser
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './modules/components/sidebar/sidebar.component';
 import { HeaderComponent } from './modules/components/header/header.component';
@@ -31,11 +30,16 @@ import { JCategoryComponent } from './modules/admin/components/j-category/j-cate
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { RegisterComponent } from './register/register.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     HomeComponent,
     SidebarComponent,
     HeaderComponent,
@@ -53,6 +57,7 @@ import { MatMenuModule } from '@angular/material/menu';
     JCategoryComponent,
     JobApprovalComponent,
     NavbarComponent,
+    RegisterComponent,
   ],
   imports: [
     NgToastModule,
@@ -62,10 +67,15 @@ import { MatMenuModule } from '@angular/material/menu';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatInputModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
     ToastrModule.forRoot(),
     MatMenuModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatButtonModule,
+
 
   ],
   providers: [

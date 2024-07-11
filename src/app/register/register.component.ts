@@ -1,8 +1,9 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-register',
@@ -10,52 +11,42 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  form!: FormGroup
   emailFormControl = new FormControl('', [Validators.required, Validators.email]); //email validation
-
+  form: FormGroup
 
   constructor(
     private formbuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
-
+    private snackBar: MatSnackBar,
+    private Toast: NgToastService,
   ) {
-this.initializeForm();
+    //get forms data
+    this.form = this.formbuilder.group({
+      company: ['', [Validators.required]],
+      contact: ['', [Validators.required, Validators.pattern("^((\\+94-?)|0)?[0-9]{9}$")]],
+      email: "",
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ]
+      ],
+      con_password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+        ]
+      ],
+      companyurl: ['', [Validators.required]],
+      userRole: "company",
+      city: ['', Validators.required],
+      address: ['', Validators.required]
+    })
   }
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // Clear local storage before login
-      localStorage.clear();
-    }
-   
-   }
-   initializeForm(){
-      //get forms data
-      this.form = this.formbuilder.group({
-        company: ['', [Validators.required]],
-        contact: ['', [Validators.required, Validators.pattern("^((\\+94-?)|0)?[0-9]{9}$")]],
-        email: "",
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-          ]
-        ],
-        con_password: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-          ]
-        ],
-        companyurl: ['', [Validators.required]],
-        userRole: "company",
-        city: ['', Validators.required],
-        address: ['', Validators.required]
-      })
-   }
+  ngOnInit(): void { }
 
   //check email validation again
   ValidateEmail = (email: any) => {
@@ -79,6 +70,7 @@ this.initializeForm();
 
   // submit form data with validate data
   submit(): void {
-  
+
   }
+
 }
