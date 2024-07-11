@@ -1,46 +1,31 @@
-import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { DirectComReg, DirectComRegRes } from '../../../../../../models/user';
+import { UserService } from '../../../../../../services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { TempComReg } from '../models/user';
-import { UserService } from '../services/user/user.service';
-import { error } from 'console';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  selector: 'app-user-reg',
+  templateUrl: './user-reg.component.html',
+  styleUrl: './user-reg.component.css'
 })
-export class RegisterComponent {
-  form!: FormGroup
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]); //email validation
-
-
-  constructor(
-    private formbuilder: FormBuilder,
+export class UserRegComponent {
+  form!: FormGroup;
+  _response!:DirectComRegRes
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  constructor(private formbuilder: FormBuilder,
     private http: HttpClient,
-    private router: Router,
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private toastr: ToastrService,
     private userService: UserService,
-    @Inject(PLATFORM_ID) private platformId: Object
-
-  ) {
-    this.initializeForm();
-  }
-  ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      // Clear local storage before login
-      localStorage.clear();
-    }
-
-  }
-  initializeForm() {
-    //get forms data
+    private _dialogRef: MatDialogRef<UserRegComponent>) {
+    //getting data with validation
     this.form = this.formbuilder.group({
+
       company: ['', [Validators.required]],
       contact: ['', [Validators.required, Validators.pattern("^((\\+94-?)|0)?[0-9]{9}$")]],
       email: "",
@@ -48,14 +33,14 @@ export class RegisterComponent {
         '',
         [
           Validators.required,
-          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
         ]
       ],
       con_password: [
         '',
         [
           Validators.required,
-          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+          Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
         ]
       ],
       companyurl: ['', [Validators.required]],
@@ -64,8 +49,7 @@ export class RegisterComponent {
       address: ['', Validators.required]
     })
   }
-
-  //check email validation again
+//check validation email again
   ValidateEmail = (email: any) => {
     var ValidRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -76,7 +60,7 @@ export class RegisterComponent {
     }
   }
 
-  //check confim pass equality
+  //checking passowrd
   checkpass = (pass: any, con_pass: any) => {
     if (pass == con_pass) {
       return true;
@@ -85,40 +69,40 @@ export class RegisterComponent {
     }
   }
 
-  // submit form data with validate data
-  submit(): void {
+  onCompanySubmit() {
+    // set raw values
     let user = this.form.getRawValue()
     user.email = this.emailFormControl.value;
+
+    console.log(user);
     if (user.company == "" || user.contact == "" || this.emailFormControl.value == "" || user.contact == '' || user.city == '' || user.address == '' || user.password == "" || user.con_password == "" || user.companyurl == "") {
-      this._snackBar.open("please  enter all the fields", 'Close', {
+      this.snackBar.open("please  enter all the fields", 'Close', {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
       })
     } else if (!this.ValidateEmail(this.emailFormControl.value)) {
-      this._snackBar.open("please  enter valid email", 'Close', {
+      this.snackBar.open("please  enter valid email", 'Close', {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
       })
-
-
     } else if (!this.form.valid) {
-      this._snackBar.open("please enter valid details", 'Close', {
+      this.snackBar.open("please enter valid details", 'Close', {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
       })
 
     } else if (!this.checkpass(user.password, user.con_password)) {
-      this._snackBar.open("Your password does not match", 'Close', {
+      this.snackBar.open("Your password does not match", 'Close', {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
       })
     } else {
 
-      let _obj: TempComReg = {
+      let _obj: DirectComReg = {
         email: this.emailFormControl.value as string,
         company: user.company as string,
         contact: user.contact as string,
@@ -131,18 +115,30 @@ export class RegisterComponent {
       console.log(_obj)
 
       //set api to user
-      this.userService.ProceedCompanyRegTemp(_obj).subscribe(items => {
-        this.toastr.success('Thank you!!!', 'Your registration is sent please wait for admin approve');
-        this.router.navigate(['/']);
+      this.userService.ProceedCompanyRegDirect(_obj).subscribe(items => {
+        this._response = items
+        console.log(this._response)
 
-      }, error => {
-        this._snackBar.open(error.error.message, 'Close', {
-          duration: 3000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'center'
-        })
-      }
+        this.toastr.success('Thank you!!!', 'Your registration successfully and sent the email');
+        setTimeout(() => {
+          window.location.href = '/admin/accounts';
+          this._dialogRef.close();
+        }, 1000);
+        this._dialogRef.close();
+      },
+        (error) => {
+          this.toastr.success('Failed to register user', error.error.message);
+          console.error('Error updating user:', error);
+        }
       )
+
+
+
+   
     }
   }
 }
+
+ 
+
+  

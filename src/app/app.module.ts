@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -19,7 +18,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog'
-import { MatInputModule } from '@angular/material/input';
 import { CategoryComponent } from './modules/admin/components/category/category.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +31,14 @@ import { JCategoryComponent } from './modules/admin/components/j-category/j-cate
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
+import { MessageComponent } from './modules/admin/components/accounts/components/message/message.component';
+import { MatTableModule } from '@angular/material/table';
+import { DataTablesModule } from 'angular-datatables';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { UserRegComponent } from './modules/admin/components/accounts/components/user-reg/user-reg.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +48,6 @@ import { MatMenuModule } from '@angular/material/menu';
     HomeComponent,
     SidebarComponent,
     HeaderComponent,
-    
     BodyComponent,
     NotFoundComponent,
     AdminComponent,
@@ -57,7 +61,10 @@ import { MatMenuModule } from '@angular/material/menu';
     AccountsComponent,
     JCategoryComponent,
     JobApprovalComponent,
-    NavbarComponent
+    NavbarComponent,
+    EditUserComponent,
+    MessageComponent,
+    UserRegComponent
   ],
   imports: [
     NgToastModule,
@@ -72,7 +79,15 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     ToastrModule.forRoot(),
     MatMenuModule,
-  
+    MatTableModule,
+    DataTablesModule,
+    MatFormFieldModule,
+    
+   
+    MatButtonModule,
+
+
+
   ],
   providers: [
     provideClientHydration(),
