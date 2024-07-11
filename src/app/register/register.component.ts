@@ -79,5 +79,65 @@ this.initializeForm();
 
   // submit form data with validate data
   submit(): void {
+<<<<<<< HEAD
+=======
+    let user = this.form.getRawValue()
+    user.email = this.emailFormControl.value;
+    if (user.company == "" || user.contact == "" || this.emailFormControl.value == "" || user.contact == '' || user.city == '' || user.address == '' || user.password == "" || user.con_password == "" || user.companyurl == "") {
+      this._snackBar.open("please  enter all the fields", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+    } else if (!this.ValidateEmail(this.emailFormControl.value)) {
+      this._snackBar.open("please  enter valid email", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+
+
+    } else if (!this.form.valid) {
+      this._snackBar.open("please enter valid details", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+
+    } else if (!this.checkpass(user.password, user.con_password)) {
+      this._snackBar.open("Your password does not match", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+    } else {
+
+      let _obj: TempComReg = {
+        email: this.emailFormControl.value as string,
+        company: user.company as string,
+        contact: user.contact as string,
+        password: user.password as string,
+        companyurl: user.companyurl as string,
+        userRole: user.userRole as string,
+        city: user.city as string,
+        address: user.address as string
+      }
+      console.log(_obj)
+
+      //set api to user
+      this.userService.ProceedCompanyRegTemp(_obj).subscribe(items => {
+        this.toastr.success('Thank you!!!', 'Your registration is sent please wait for admin approve');
+        this.router.navigate(['/']);
+
+      }, error => {
+        this._snackBar.open(error.error.message, 'Close', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center'
+        })
+      }
+      )
+    }
+>>>>>>> 5048ed4 (up)
   }
 }

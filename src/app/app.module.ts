@@ -33,7 +33,17 @@ import { JCategoryComponent } from './modules/admin/components/j-category/j-cate
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 import { NavbarComponent } from './modules/components/navbar/navbar.component';
 import { MatMenuModule } from '@angular/material/menu';
+<<<<<<< HEAD
 
+=======
+import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
+import { MessageComponent } from './modules/admin/components/accounts/components/message/message.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { UserRegComponent } from './modules/admin/components/accounts/components/user-reg/user-reg.component';
+>>>>>>> 5048ed4 (up)
 
 @NgModule({
   declarations: [
@@ -72,7 +82,16 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSnackBarModule,
     ToastrModule.forRoot(),
     MatMenuModule,
+<<<<<<< HEAD
   
+=======
+    MatTableModule,
+    MatFormFieldModule,
+    MatButtonModule,
+
+
+
+>>>>>>> 5048ed4 (up)
   ],
   providers: [
     provideClientHydration(),
