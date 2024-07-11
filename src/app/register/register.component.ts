@@ -1,5 +1,6 @@
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -9,41 +10,52 @@ import { Router } from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  form!: FormGroup
   emailFormControl = new FormControl('', [Validators.required, Validators.email]); //email validation
-  form: FormGroup
+
 
   constructor(
     private formbuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
 
   ) {
-    //get forms data
-    this.form = this.formbuilder.group({
-      company: ['', [Validators.required]],
-      contact: ['', [Validators.required, Validators.pattern("^((\\+94-?)|0)?[0-9]{9}$")]],
-      email: "",
-      password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-        ]
-      ],
-      con_password: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-        ]
-      ],
-      companyurl: ['', [Validators.required]],
-      userRole: "company",
-      city: ['', Validators.required],
-      address: ['', Validators.required]
-    })
+this.initializeForm();
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Clear local storage before login
+      localStorage.clear();
+    }
+   
+   }
+   initializeForm(){
+      //get forms data
+      this.form = this.formbuilder.group({
+        company: ['', [Validators.required]],
+        contact: ['', [Validators.required, Validators.pattern("^((\\+94-?)|0)?[0-9]{9}$")]],
+        email: "",
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+          ]
+        ],
+        con_password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern('(?=.*[a-z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+          ]
+        ],
+        companyurl: ['', [Validators.required]],
+        userRole: "company",
+        city: ['', Validators.required],
+        address: ['', Validators.required]
+      })
+   }
 
   //check email validation again
   ValidateEmail = (email: any) => {

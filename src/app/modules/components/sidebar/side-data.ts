@@ -1,7 +1,7 @@
 
 export const adminData = [//load all admin components
      {
-          routeLink: 'dashboard',
+          routeLink: 'admin-dashboard',
           icon: 'fas fa-home',
           Label: 'Dashboard'
 
@@ -32,9 +32,9 @@ export const adminData = [//load all admin components
      // }
 ]
 
-export const empData = [// load all comapny7 componenets
+export const comData = [// load all comapny componenets
      {
-          routeLink: 'emp-dashboard',
+          routeLink: 'dashboard',
           icon: 'fas fa-home',
           Label: 'Dashboard'
 

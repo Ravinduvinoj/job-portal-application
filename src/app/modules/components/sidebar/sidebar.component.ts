@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { adminData, empData } from './side-data';
+import { adminData, comData } from './side-data';
 
 interface SidenavToggle {
   screenWidth: number;
@@ -14,7 +14,12 @@ interface SidenavToggle {
 export class SidebarComponent implements OnInit{
 
   ngOnInit(): void {
-    
+    let userRole = localStorage.getItem('userRole') as string;
+    if(userRole =="admin"){
+      this.navData=adminData;
+    }else if(userRole=="company"){
+      this.navData=comData;
+    }
   }
 
   @Output() onToggleSidenav: EventEmitter<SidenavToggle> = new EventEmitter();

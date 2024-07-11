@@ -25,6 +25,12 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule } from 'ng-angular-popup';
 import { ToastrModule } from 'ngx-toastr';
+import { JoblistningsComponent } from './modules/company/components/joblistnings/joblistnings.component';
+import { JobpostComponent } from './modules/company/components/jobpost/jobpost.component';
+import { ScheduleComponent } from './modules/company/components/schedule/schedule.component';
+import { AccountsComponent } from './modules/admin/components/accounts/accounts.component';
+import { JCategoryComponent } from './modules/admin/components/j-category/j-category.component';
+import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 
 
 @NgModule({
@@ -42,7 +48,13 @@ import { ToastrModule } from 'ngx-toastr';
     CompanyComponent,
     AdminDashboardComponent,
     DashboardComponent,
-    CategoryComponent
+    CategoryComponent,
+    JoblistningsComponent,
+    JobpostComponent,
+    ScheduleComponent,
+    AccountsComponent,
+    JCategoryComponent,
+    JobApprovalComponent
   ],
   imports: [
     NgToastModule,
