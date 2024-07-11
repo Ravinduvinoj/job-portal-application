@@ -43,39 +43,39 @@ export class AccountsComponent implements OnInit {
   }
   //delete selected user
   onUserDelete(User: any): void {
-    if (User.userRole == 'admin') {
-      this.snackBar.open("you can't delete", 'Close', { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' })
-    } else {
-      const dialogRef = this.dialog.open(MessageComponent);//top up dialog
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          let _obj: deleteUserAcc = {
-            email: User.email
-          }
-          this.userService.ProceedDeleteUserAcc(_obj).subscribe(items => {
-            this.toastr.success('User Deleted', 'User Deleted successfully');
-            this.fetchUserAccounts();
-          }, error => {
-            this.toastr.error('Error deleting user', error.error.message);
-            console.error('Error deleting user:', error.error.message);
-          })
-        }
-      });
-    }
+    // if (User.userRole == 'admin') {
+    //   this.snackBar.open("you can't delete", 'Close', { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' })
+    // } else {
+    //   const dialogRef = this.dialog.open(MessageComponent);//top up dialog
+    //   dialogRef.afterClosed().subscribe(result => {
+    //     if (result) {
+    //       let _obj: deleteUserAcc = {
+    //         email: User.email
+    //       }
+    //       this.userService.ProceedDeleteUserAcc(_obj).subscribe(items => {
+    //         this.toastr.success('User Deleted', 'User Deleted successfully');
+    //         this.fetchUserAccounts();
+    //       }, error => {
+    //         this.toastr.error('Error deleting user', error.error.message);
+    //         console.error('Error deleting user:', error.error.message);
+    //       })
+    //     }
+    //   });
+    // }
   }
   //approve tempary accounts of new registerd
   onApprove(tempUser: any): void {
 
-    let _obj: approveTempAcc = {
-      email: tempUser.email
-    }
-    this.userService.ProceedApproveTemAcc(_obj).subscribe(items => {
-      this.toastr.success('mail is sent', 'User approved successfully');
-      this.fetchTempUsers(); // Refresh the user list after approved
-    }, error => {
-      this.toastr.error('Error approving user', error);
-      console.error('Error approving user', error);
-    })
+    // let _obj: approveTempAcc = {
+    //   email: tempUser.email
+    // }
+    // this.userService.ProceedApproveTemAcc(_obj).subscribe(items => {
+    //   this.toastr.success('mail is sent', 'User approved successfully');
+    //   this.fetchTempUsers(); // Refresh the user list after approved
+    // }, error => {
+    //   this.toastr.error('Error approving user', error);
+    //   console.error('Error approving user', error);
+    // })
   }
 
   //admin direct register the company through the site

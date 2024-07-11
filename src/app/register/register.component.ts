@@ -118,31 +118,31 @@ export class RegisterComponent {
       })
     } else {
 
-      let _obj: TempComReg = {
-        email: this.emailFormControl.value as string,
-        company: user.company as string,
-        contact: user.contact as string,
-        password: user.password as string,
-        companyurl: user.companyurl as string,
-        userRole: user.userRole as string,
-        city: user.city as string,
-        address: user.address as string
-      }
-      console.log(_obj)
+      // let _obj: TempComReg = {
+      //   email: this.emailFormControl.value as string,
+      //   company: user.company as string,
+      //   contact: user.contact as string,
+      //   password: user.password as string,
+      //   companyurl: user.companyurl as string,
+      //   userRole: user.userRole as string,
+      //   city: user.city as string,
+      //   address: user.address as string
+      // }
+      // console.log(_obj)
 
-      //set api to user
-      this.userService.ProceedCompanyRegTemp(_obj).subscribe(items => {
-        this.toastr.success('Thank you!!!', 'Your registration is sent please wait for admin approve');
-        this.router.navigate(['/']);
+      // //set api to user
+      // this.userService.ProceedCompanyRegTemp(_obj).subscribe(items => {
+      //   this.toastr.success('Thank you!!!', 'Your registration is sent please wait for admin approve');
+      //   this.router.navigate(['/']);
 
-      }, error => {
-        this._snackBar.open(error.error.message, 'Close', {
-          duration: 3000,
-          verticalPosition: 'bottom',
-          horizontalPosition: 'center'
-        })
-      }
-      )
+      // }, error => {
+      //   this._snackBar.open(error.error.message, 'Close', {
+      //     duration: 3000,
+      //     verticalPosition: 'bottom',
+      //     horizontalPosition: 'center'
+      //   })
+      // }
+      // )
     }
   }
 }

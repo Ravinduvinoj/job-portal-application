@@ -30,13 +30,13 @@ export class UserService {
   ProceedDeleteTemAcc(_data:deleteTempAcc) {
     return this.http.get<any>(this.baseUrl + 'delete-tempacc'+'/'+_data.email);
   }
-  ProceedDeleteUserAcc(_data:deleteUserAcc) {
-    return this.http.get<any>(this.baseUrl + 'delete-useracc'+'/'+_data.email);
-  }
-  ProceedApproveTemAcc(_data:approveTempAcc) {
-    return this.http.get<any>(this.baseUrl + 'approve-tempacc'+'/'+_data.email);
-  }
-  ProceedCompanyRegTemp(_data: TempComReg) {
-    return this.http.post<any>(this.baseUrl + 'temp-register', _data,{withCredentials:true});
-  }
+  // ProceedDeleteUserAcc(_data:deleteUserAcc) {
+  //   return this.http.get<any>(this.baseUrl + 'delete-useracc'+'/'+_data.email);
+  // }
+  // ProceedApproveTemAcc(_data:approveTempAcc) {
+  //   return this.http.get<any>(this.baseUrl + 'approve-tempacc'+'/'+_data.email);
+  // }
+  // ProceedCompanyRegTemp(_data: TempComReg) {
+  //   return this.http.post<any>(this.baseUrl + 'temp-register', _data,{withCredentials:true});
+  // }
 }
