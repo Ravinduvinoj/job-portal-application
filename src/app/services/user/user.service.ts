@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { loginresp, usercred } from '../../models/user';
+import { ApprovedUsers, approveTempAcc, deleteTempAcc, deleteUserAcc, DirectComReg, DirectComRegRes, loginresp, TempComReg, tempusers, UpUser, UpUserRes, usercred } from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +12,10 @@ export class UserService {
 
   baseUrl = environment.apiUrl;
 
-  
   Proceedlogin(_data: usercred) {
     return this.http.post<loginresp>(this.baseUrl + 'login', _data,{withCredentials:true});
   }
-<<<<<<< HEAD
 
-=======
   ProceedTempUsers() {
     return this.http.get<tempusers>(this.baseUrl + 'getalltempuser');
   }
@@ -43,5 +40,5 @@ export class UserService {
   ProceedCompanyRegTemp(_data: TempComReg) {
     return this.http.post<any>(this.baseUrl + 'temp-register', _data,{withCredentials:true});
   }
->>>>>>> 5048ed4 (up)
+
 }

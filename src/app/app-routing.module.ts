@@ -15,6 +15,7 @@ import { JobpostComponent } from './modules/company/components/jobpost/jobpost.c
 import { ScheduleComponent } from './modules/company/components/schedule/schedule.component';
 import { NotFoundComponent } from './modules/components/not-found/not-found.component';
 import { authGuard } from './_guard/auth.guard';
+import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -28,13 +29,14 @@ const routes: Routes = [
       { path: 'admin-dashboard', component: AdminDashboardComponent ,canActivate:[authGuard]},
       { path: 'j-category', component: JCategoryComponent,canActivate:[authGuard] },
       { path: 'accounts', component: AccountsComponent,canActivate:[authGuard] },
-      // {
-      //   path: 'jobapproval', component: JobapprovalComponent, children: [
+       {
+         path: 'jobapproval', component: JobApprovalComponent,
+          // children: [
       //     { path: "post-profile", component: ApprovalProfileComponent },
       //     { path: "pending", component: PendingBoxComponent }
 
       //   ]
-      // },
+      },
       // { path: 'subscription', component: SubscriptionComponent },
 
     ]

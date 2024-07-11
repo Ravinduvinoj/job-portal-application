@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formbuilder: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private _snackBar: MatSnackBar,
     private toastr: ToastrService,
@@ -118,8 +116,6 @@ export class LoginComponent implements OnInit {
         } else {
           this.toastr.error('Failed to login', 'null local storage');
         }
-
-
 
       }, error => {
         this.toastr.error('Failed to login', error.error.message);
