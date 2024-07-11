@@ -34,7 +34,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
 import { MessageComponent } from './modules/admin/components/accounts/components/message/message.component';
 import { MatTableModule } from '@angular/material/table';
-import { DataTablesModule } from 'angular-datatables';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -80,10 +79,7 @@ import { UserRegComponent } from './modules/admin/components/accounts/components
     ToastrModule.forRoot(),
     MatMenuModule,
     MatTableModule,
-    DataTablesModule,
     MatFormFieldModule,
-    
-   
     MatButtonModule,
 
 
