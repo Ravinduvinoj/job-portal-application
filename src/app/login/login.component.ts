@@ -11,12 +11,10 @@ import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
-  form!: FormGroup;
-  _response!: loginresp;
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  private isBrowser: boolean = false;
 
   constructor(
     private formbuilder: FormBuilder,
@@ -26,11 +24,23 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     @Inject(PLATFORM_ID) private platformId: Object
+
   ) {
+
     this.initializeForm();
+
   }
 
+  form!: FormGroup;
+  _response!: loginresp;
+
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]); //check email validation using angular material components
+
+
+
   ngOnInit(): void {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+    //clear local storage before login
     if (isPlatformBrowser(this.platformId)) {
       // Clear local storage before login
       localStorage.clear();
@@ -46,60 +56,77 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ValidateEmail(email: any): boolean {
-    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-    return validRegex.test(email);
+  //check email validation
+  ValidateEmail = (email: any) => {
+    var ValidRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (email.match(ValidRegex)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   submit(): void {
-    let user = this.form.getRawValue();
-    user.email = this.emailFormControl.value;
+    //getting raw value in the form
+    let user = this.form.getRawValue()
+    user.email = this.emailFormControl.value; //asign email compenent assigned value
 
-    if (!user.email || !user.password) {
-      this._snackBar.open("Please enter all the fields", 'Close', {
+    //check email & password is empty
+    if (user.email == "" || user.password == "") {
+      this._snackBar.open("please  enter all the fields", 'Close', {
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
-      });
-      this.toastr.error('Please enter all the fields', 'Error');
-      return;
-    }
+      })
+      this.toastr.error('please  enter all the fields', 'error');
 
-    if (!this.ValidateEmail(this.emailFormControl.value)) {
-      this._snackBar.open("Please enter a valid email", 'Close', {
+    } else if (!this.ValidateEmail(this.emailFormControl.value)) {//check login email is validation
+      this._snackBar.open("please  enter valid email", 'Close', {
+
         duration: 3000,
         verticalPosition: 'bottom',
         horizontalPosition: 'center'
-      });
-      this.toastr.error('Please enter a valid email', 'Error');
-      return;
-    }
+      })
+      this.toastr.error('please  enter valid email', 'error');
 
-    let _obj: usercred = {
-      email: this.emailFormControl.value as string,
-      password: this.form.value.password as string
-    };
+    } else {
 
-    this.userService.Proceedlogin(_obj).subscribe(
-      (items) => {
-        this._response = items;
-        if (isPlatformBrowser(this.platformId)) {
-          localStorage.setItem('token', this._response.token);
-          localStorage.setItem('email', this._response.data.email);
-          localStorage.setItem('_id', this._response.data._id);
-          localStorage.setItem('userRole', this._response.userRole);
-          localStorage.setItem('company', this._response.data.company);
+      let _obj: usercred = {
+        email: this.emailFormControl.value as string,
+        password: this.form.value.password as string
+      }
+      console.log(_obj)
+
+      this.userService.Proceedlogin(_obj).subscribe(items => {
+        this._response = items
+
+        console.log(this._response)
+        if (this.isBrowser) {
+          window.localStorage.setItem('token', this._response.token);
+          window.localStorage.setItem('email', this._response.data.email);
+          window.localStorage.setItem('_id', this._response.data._id);
+          window.localStorage.setItem('userRole', this._response.userRole);
+          window.localStorage.setItem('company', this._response.data.company);
+
+          //check role base
+          if (this._response.userRole === "admin") {
+            this.router.navigate(['/admin/admin-dashboard']);
+          } else if (this._response.userRole === "company") {
+            this.router.navigate(['/company/dashboard']);
+          }
+
+        } else {
+          this.toastr.error('Failed to login', 'null local storage');
         }
 
-        if (this._response.userRole === "admin") {
-          this.router.navigate(['/admin/admin-dashboard']);
-        } else if (this._response.userRole === "company") {
-          this.router.navigate(['/company/dashboard']);
-        }
-      },
-      (error) => {
+
+
+      }, error => {
         this.toastr.error('Failed to login', error.error.message);
       }
-    );
+      )
+
+    }
   }
+
 }

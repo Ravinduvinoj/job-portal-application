@@ -31,6 +31,8 @@ import { ScheduleComponent } from './modules/company/components/schedule/schedul
 import { AccountsComponent } from './modules/admin/components/accounts/accounts.component';
 import { JCategoryComponent } from './modules/admin/components/j-category/j-category.component';
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
+import { NavbarComponent } from './modules/components/navbar/navbar.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 @NgModule({
@@ -54,7 +56,8 @@ import { JobApprovalComponent } from './modules/admin/components/job-approval/jo
     ScheduleComponent,
     AccountsComponent,
     JCategoryComponent,
-    JobApprovalComponent
+    JobApprovalComponent,
+    NavbarComponent
   ],
   imports: [
     NgToastModule,
@@ -68,6 +71,7 @@ import { JobApprovalComponent } from './modules/admin/components/job-approval/jo
     BrowserAnimationsModule,
     MatSnackBarModule,
     ToastrModule.forRoot(),
+    MatMenuModule,
   
   ],
   providers: [
