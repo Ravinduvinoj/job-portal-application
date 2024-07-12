@@ -41,6 +41,7 @@ import { AddSubCategoryComponent } from './modules/admin/components/j-category/c
 import { NewCategoryComponent } from './modules/admin/components/j-category/components/new-category/new-category.component';
 import { UpdateCategoryComponent } from './modules/admin/components/j-category/components/update-category/update-category.component';
 import { UpdateSubCategoryComponent } from './modules/admin/components/j-category/components/update-sub-category/update-sub-category.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,7 @@ import { UpdateSubCategoryComponent } from './modules/admin/components/j-categor
     MatTableModule,
     MatFormFieldModule,
     MatButtonModule,
-
+    MatSelectModule,
 
   ],
   providers: [

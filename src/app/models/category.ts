@@ -14,7 +14,14 @@ export interface allCategory {
    export interface UpCategory {
     jobcategory:any;
     oldCategory:string;
-    
+   }
+   export interface UpSubCategory {
+    catInfo:any;
+    oldCategory:string;
+   }
+   export interface addSubCategory {
+    mainCatId:string;
+    categoryData:any;
    
    }
 

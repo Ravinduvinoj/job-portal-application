@@ -1,8 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { UpCategory } from '../../../../../../models/category';
 import { ApiService } from '../../../../../../services/api-service/api.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,8 +15,6 @@ export class UpdateCategoryComponent {
   form: FormGroup
 
   constructor(private _fb: FormBuilder,
-    private http: HttpClient,
-    private snackBar: MatSnackBar,
     private apiserve:ApiService,
     private toastr: ToastrService,
     private _dialogRef: MatDialogRef<UpdateCategoryComponent>,

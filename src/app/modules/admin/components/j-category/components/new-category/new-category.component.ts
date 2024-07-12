@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -17,7 +16,7 @@ export class NewCategoryComponent implements OnInit {
   form!: FormGroup
 
   constructor(private _fb: FormBuilder,
-    private http: HttpClient,
+ 
     private snackBar: MatSnackBar,
     private toastr: ToastrService,
     private apiserve: ApiService,
