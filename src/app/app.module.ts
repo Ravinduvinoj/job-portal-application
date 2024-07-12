@@ -38,7 +38,6 @@ import { MessageComponent } from './modules/admin/components/accounts/components
 import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
 import { UserRegComponent } from './modules/admin/components/accounts/components/user-reg/user-reg.component';
 import { AddSubCategoryComponent } from './modules/admin/components/j-category/components/add-sub-category/add-sub-category.component';
-import { DeleteCategoryComponent } from './modules/admin/components/j-category/components/delete-category/delete-category.component';
 import { NewCategoryComponent } from './modules/admin/components/j-category/components/new-category/new-category.component';
 import { UpdateCategoryComponent } from './modules/admin/components/j-category/components/update-category/update-category.component';
 import { UpdateSubCategoryComponent } from './modules/admin/components/j-category/components/update-sub-category/update-sub-category.component';
@@ -68,7 +67,6 @@ import { UpdateSubCategoryComponent } from './modules/admin/components/j-categor
     EditUserComponent,
     UserRegComponent,
     AddSubCategoryComponent,
-    DeleteCategoryComponent,
     NewCategoryComponent,
     UpdateCategoryComponent,
     UpdateSubCategoryComponent,

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { allCategory, mainCategory } from '../../models/category';
+import { addCategory, allCategory, mainCategory } from '../../models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +18,8 @@ export class ApiService {
   }
   ProceedGetAllMainCat() {
     return this.http.get<allCategory>(this.baseUrl + 'get-all-category');
+  }
+  ProceedAddCat(_data: addCategory) {
+    return this.http.post<any>(this.baseUrl + 'addcategory', _data,{withCredentials:true});
   }
 }
