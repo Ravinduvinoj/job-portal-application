@@ -12,10 +12,10 @@ export class UserService {
 
   baseUrl = environment.apiUrl;
 
+  //list all of APIs related user
   Proceedlogin(_data: usercred) {
     return this.http.post<loginresp>(this.baseUrl + 'login', _data,{withCredentials:true});
   }
-
   ProceedTempUsers() {
     return this.http.get<tempusers>(this.baseUrl + 'getalltempuser');
   }

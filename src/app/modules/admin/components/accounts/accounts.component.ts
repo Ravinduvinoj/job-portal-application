@@ -1,5 +1,3 @@
-
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,7 +28,6 @@ export class AccountsComponent implements OnInit {
   pdfTable: any
 
   constructor(
-    private http: HttpClient,
     private snackBar: MatSnackBar,
     private toastr: ToastrService,
     public dialog: MatDialog,
@@ -145,11 +142,11 @@ export class AccountsComponent implements OnInit {
     this.userService.ProceedTempUsers().subscribe({
       next: users => {
         this.tempUsers = users
-      },
-      error: (error: any) => {
-        console.error('Error fetching temp users:', error);
       }
-    });
+
+    }), (error: any) => {
+      console.error('Error fetching temp users:', error);
+    };
   }
 
   //fetching all users approved

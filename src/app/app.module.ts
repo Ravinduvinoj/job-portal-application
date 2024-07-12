@@ -17,7 +17,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideHttpClient, withFetch } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog'
-import { CategoryComponent } from './modules/admin/components/category/category.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgToastModule } from 'ng-angular-popup';
@@ -38,6 +37,11 @@ import { RegisterComponent } from './register/register.component';
 import { MessageComponent } from './modules/admin/components/accounts/components/message/message.component';
 import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
 import { UserRegComponent } from './modules/admin/components/accounts/components/user-reg/user-reg.component';
+import { AddSubCategoryComponent } from './modules/admin/components/j-category/components/add-sub-category/add-sub-category.component';
+import { DeleteCategoryComponent } from './modules/admin/components/j-category/components/delete-category/delete-category.component';
+import { NewCategoryComponent } from './modules/admin/components/j-category/components/new-category/new-category.component';
+import { UpdateCategoryComponent } from './modules/admin/components/j-category/components/update-category/update-category.component';
+import { UpdateSubCategoryComponent } from './modules/admin/components/j-category/components/update-sub-category/update-sub-category.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,6 @@ import { UserRegComponent } from './modules/admin/components/accounts/components
     CompanyComponent,
     AdminDashboardComponent,
     DashboardComponent,
-    CategoryComponent,
     JoblistningsComponent,
     JobpostComponent,
     ScheduleComponent,
@@ -64,6 +67,11 @@ import { UserRegComponent } from './modules/admin/components/accounts/components
     MessageComponent,
     EditUserComponent,
     UserRegComponent,
+    AddSubCategoryComponent,
+    DeleteCategoryComponent,
+    NewCategoryComponent,
+    UpdateCategoryComponent,
+    UpdateSubCategoryComponent,
   ],
   imports: [
     NgToastModule,

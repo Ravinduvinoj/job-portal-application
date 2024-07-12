@@ -1,9 +1,14 @@
+
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { NgToastService } from 'ng-angular-popup';
+import { ToastrService } from 'ngx-toastr';
+import { TempComReg } from '../models/user';
+import { UserService } from '../services/user/user.service';
+import { error } from 'console';
 
 @Component({
   selector: 'app-register',
@@ -11,16 +16,30 @@ import { NgToastService } from 'ng-angular-popup';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  form!: FormGroup
   emailFormControl = new FormControl('', [Validators.required, Validators.email]); //email validation
-  form: FormGroup
+
 
   constructor(
     private formbuilder: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar,
-    private Toast: NgToastService,
+    private _snackBar: MatSnackBar,
+    private toastr: ToastrService,
+    private userService: UserService,
+    @Inject(PLATFORM_ID) private platformId: Object
+
   ) {
+    this.initializeForm();
+  }
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      // Clear local storage before login
+      localStorage.clear();
+    }
+
+  }
+  initializeForm() {
     //get forms data
     this.form = this.formbuilder.group({
       company: ['', [Validators.required]],
@@ -46,7 +65,6 @@ export class RegisterComponent {
       address: ['', Validators.required]
     })
   }
-  ngOnInit(): void { }
 
   //check email validation again
   ValidateEmail = (email: any) => {
@@ -70,7 +88,64 @@ export class RegisterComponent {
 
   // submit form data with validate data
   submit(): void {
+    let user = this.form.getRawValue()
+    user.email = this.emailFormControl.value;
+    if (user.company == "" || user.contact == "" || this.emailFormControl.value == "" || user.contact == '' || user.city == '' || user.address == '' || user.password == "" || user.con_password == "" || user.companyurl == "") {
+      this._snackBar.open("please  enter all the fields", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+    } else if (!this.ValidateEmail(this.emailFormControl.value)) {
+      this._snackBar.open("please  enter valid email", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
 
+
+    } else if (!this.form.valid) {
+      this._snackBar.open("please enter valid details", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+
+    } else if (!this.checkpass(user.password, user.con_password)) {
+      this._snackBar.open("Your password does not match", 'Close', {
+        duration: 3000,
+        verticalPosition: 'bottom',
+        horizontalPosition: 'center'
+      })
+    } else {
+
+      let _obj: TempComReg = {
+        email: this.emailFormControl.value as string,
+        company: user.company as string,
+        contact: user.contact as string,
+        password: user.password as string,
+        companyurl: user.companyurl as string,
+        userRole: user.userRole as string,
+        city: user.city as string,
+        address: user.address as string
+      }
+      console.log(_obj)
+
+      //set api to user
+      this.userService.ProceedCompanyRegTemp(_obj).subscribe(items => {
+        this.toastr.success('Thank you!!!', 'Your registration is sent please wait for admin approve');
+        this.router.navigate(['/']);
+
+      }, error => {
+        this._snackBar.open(error.error.message, 'Close', {
+          duration: 3000,
+          verticalPosition: 'bottom',
+          horizontalPosition: 'center'
+        })
+      }
+      )
+    }
   }
-
 }
+
+
