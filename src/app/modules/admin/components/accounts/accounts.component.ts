@@ -6,9 +6,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../../../services/user/user.service';
+import { MessageComponent } from './components/message/message.component';
 import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { UserRegComponent } from './components/user-reg/user-reg.component';
 import { approveTempAcc, deleteTempAcc, deleteUserAcc } from '../../../../models/user';
 
 @Component({
@@ -44,7 +47,21 @@ export class AccountsComponent implements OnInit {
     if (User.userRole == 'admin') {
       this.snackBar.open("you can't delete", 'Close', { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' })
     } else {
-
+      const dialogRef = this.dialog.open(MessageComponent);//top up dialog
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          let _obj: deleteUserAcc = {
+            email: User.email
+          }
+          this.userService.ProceedDeleteUserAcc(_obj).subscribe(items => {
+            this.toastr.success('User Deleted', 'User Deleted successfully');
+            this.fetchUserAccounts();
+          }, error => {
+            this.toastr.error('Error deleting user', error.error.message);
+            console.error('Error deleting user:', error.error.message);
+          })
+        }
+      });
     }
   }
   //approve tempary accounts of new registerd
@@ -64,7 +81,8 @@ export class AccountsComponent implements OnInit {
 
   //admin direct register the company through the site
   onCompanyRegister() {
-
+    this.dialog.open(UserRegComponent)
+    // this.fetchUserAccounts();
   }
 
   //on company edit
@@ -72,13 +90,29 @@ export class AccountsComponent implements OnInit {
     if (user.userRole == 'admin') {
       this.snackBar.open("you can't edit", 'Close', { duration: 3000, verticalPosition: 'bottom', horizontalPosition: 'center' })
     } else {
-   
+      this.dialog.open(EditUserComponent, { data: user });
     }
   }
 
   //deleting user when approval view
   onTempDelete(tempUser: any): void {
+    const dialogRef = this.dialog.open(MessageComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
 
+
+        let _obj: deleteTempAcc = {
+          email: tempUser.email
+        }
+        this.userService.ProceedDeleteTemAcc(_obj).subscribe(items => {
+          this.toastr.success('deleted', 'User deleted successfully');
+          this.fetchTempUsers(); // Refresh the user list after deletion
+        }, error => {
+          this.toastr.error('Error deleting user:', error);
+          console.error('Error deleting user:', error);
+        })
+      }
+    });
   }
 
   //display colums

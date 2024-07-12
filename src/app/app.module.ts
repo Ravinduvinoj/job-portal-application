@@ -35,6 +35,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from './register/register.component';
+import { MessageComponent } from './modules/admin/components/accounts/components/message/message.component';
+import { EditUserComponent } from './modules/admin/components/accounts/components/edit-user/edit-user.component';
+import { UserRegComponent } from './modules/admin/components/accounts/components/user-reg/user-reg.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +61,9 @@ import { RegisterComponent } from './register/register.component';
     JobApprovalComponent,
     NavbarComponent,
     RegisterComponent,
+    MessageComponent,
+    EditUserComponent,
+    UserRegComponent,
   ],
   imports: [
     NgToastModule,
