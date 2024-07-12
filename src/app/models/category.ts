@@ -11,3 +11,11 @@ export interface allCategory {
     categoryname:string;
    
    }
+   export interface UpCategory {
+    jobcategory:any;
+    oldCategory:string;
+    
+   
+   }
+
+   
