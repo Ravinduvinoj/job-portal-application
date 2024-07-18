@@ -46,5 +46,9 @@ export class ApiService {
     return this.http.get<any>(this.baseUrl + 'Jobseeker-Count');
   }
 
+   //list all of APIs related administrator Jon Approval
 
+   processedGetJobPendings() {
+    return this.http.get<any>(this.baseUrl + 'displayPost');
+  }
 }

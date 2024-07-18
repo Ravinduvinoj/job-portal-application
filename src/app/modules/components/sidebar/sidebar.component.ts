@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit{
   }
 
   logout(): void {
-  
+    localStorage.clear();
   }
 
 }

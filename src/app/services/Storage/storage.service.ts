@@ -7,23 +7,20 @@ export class StorageService {
 
   constructor() { }
 
-// Set a value in local storage
-setItem(key: string, value: string): void {
-  localStorage.setItem(key, value);
-}
+  private storageKey = 'myData';
 
-// Get a value from local storage
-getItem(key: string): string | null {
-  return localStorage.getItem(key);
-}
+  // Setter: Save data to local storage
+  set data(value: string) {
+    localStorage.setItem(this.storageKey, value);
+  }
 
-// Remove a value from local storage
-removeItem(key: string): void {
-  localStorage.removeItem(key);
-}
+  // Getter: Retrieve data from local storage
+  get data(): string | null {
+    return localStorage.getItem(this.storageKey);
+  }
 
-// Clear all items from local storage
-clear(): void {
-  localStorage.clear();
-}
+  // Clear data from local storage
+  clearData() {
+    localStorage.removeItem(this.storageKey);
+  }
 }

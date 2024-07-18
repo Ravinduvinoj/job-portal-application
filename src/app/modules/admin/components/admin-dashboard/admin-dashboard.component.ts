@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../../services/api-service/api.service';
 
 @Component({
@@ -6,13 +6,15 @@ import { ApiService } from '../../../../services/api-service/api.service';
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
-export class AdminDashboardComponent {
+export class AdminDashboardComponent implements OnInit{
+
   companycount: any
   adcount: any
   appcount: any
   seekers: any
 
   constructor(private apiServe: ApiService) {}
+
   ngOnInit(): void {
     //count all companies
     this.apiServe.processedGetComCount().subscribe(
@@ -21,6 +23,7 @@ export class AdminDashboardComponent {
         console.log(this.companycount);
       }
     );
+
     //count all ad
     this.apiServe.processedGetAdCount().subscribe(
       (data) => {
@@ -28,6 +31,7 @@ export class AdminDashboardComponent {
         console.log(this.adcount);
       }
     );
+
     //count all applications
     this.apiServe.processedGetAppCount().subscribe(
       (data) => {
@@ -35,6 +39,7 @@ export class AdminDashboardComponent {
         console.log(this.appcount);
       }
     );
+
     //count all jobseekers
     this.apiServe.processedGetSeekerCount().subscribe(
       (data) => {
@@ -42,6 +47,5 @@ export class AdminDashboardComponent {
         console.log(this.seekers);
       }
     );
-
   }
 }

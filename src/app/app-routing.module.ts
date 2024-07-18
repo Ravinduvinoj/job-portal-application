@@ -16,6 +16,8 @@ import { ScheduleComponent } from './modules/company/components/schedule/schedul
 import { NotFoundComponent } from './modules/components/not-found/not-found.component';
 import { authGuard } from './_guard/auth.guard';
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
+import { ApprovalProfileComponent } from './modules/admin/components/job-approval/components/approval-profile/approval-profile.component';
+import { PendingBoxComponent } from './modules/admin/components/job-approval/components/pending-box/pending-box.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,11 +33,11 @@ const routes: Routes = [
       { path: 'accounts', component: AccountsComponent,canActivate:[authGuard] },
        {
          path: 'jobapproval', component: JobApprovalComponent,
-          // children: [
-      //     { path: "post-profile", component: ApprovalProfileComponent },
-      //     { path: "pending", component: PendingBoxComponent }
+          children: [
+          { path: "post-profile", component: ApprovalProfileComponent },
+          { path: "pending", component: PendingBoxComponent }
 
-      //   ]
+        ]
       },
       // { path: 'subscription', component: SubscriptionComponent },
 

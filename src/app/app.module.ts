@@ -42,6 +42,9 @@ import { NewCategoryComponent } from './modules/admin/components/j-category/comp
 import { UpdateCategoryComponent } from './modules/admin/components/j-category/components/update-category/update-category.component';
 import { UpdateSubCategoryComponent } from './modules/admin/components/j-category/components/update-sub-category/update-sub-category.component';
 import { MatSelectModule } from '@angular/material/select';
+import { ApprovalProfileComponent } from './modules/admin/components/job-approval/components/approval-profile/approval-profile.component';
+import { PendingBoxComponent } from './modules/admin/components/job-approval/components/pending-box/pending-box.component';
+import { RemoveApprovalComponent } from './modules/admin/components/job-approval/components/remove-approval/remove-approval.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,9 @@ import { MatSelectModule } from '@angular/material/select';
     NewCategoryComponent,
     UpdateCategoryComponent,
     UpdateSubCategoryComponent,
+    ApprovalProfileComponent,
+    PendingBoxComponent,
+    RemoveApprovalComponent,
   ],
   imports: [
     NgToastModule,
