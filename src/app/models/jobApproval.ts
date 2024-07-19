@@ -1,3 +1,6 @@
-export interface JobDetails {
-    jobdata:any;
+export interface JobAdDelete {
+    jobid:string;
+   }
+   export interface JobAdPending {
+    jobid:string;
    }

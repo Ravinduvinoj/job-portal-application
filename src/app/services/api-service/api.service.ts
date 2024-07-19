@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { addCategory, addSubCategory, allCategory, mainCategory, UpCategory, UpSubCategory } from '../../models/category';
+import { JobAdDelete, JobAdPending } from '../../models/jobApproval';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,16 @@ export class ApiService {
 
    //list all of APIs related administrator Jon Approval
 
-   processedGetJobPendings() {
+   processedGetJobAd() {
     return this.http.get<any>(this.baseUrl + 'displayPost');
+  }
+  processedDeleteJobPending(_data: JobAdDelete) {
+    return this.http.get<any>(this.baseUrl + 'post/delete'+'/'+_data.jobid,{withCredentials:true});
+  }
+  processedGetPendings() {
+    return this.http.get<any>(this.baseUrl + 'temp/advertiesment');
+  }
+  processedAppJobPending(_data: JobAdPending) {
+    return this.http.get<any>(this.baseUrl + 'temp/approve'+'/'+_data.jobid,{withCredentials:true});
   }
 }
