@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { addCategory, addSubCategory, allCategory, mainCategory, UpCategory, UpSubCategory } from '../../models/category';
 import { JobAdDelete, JobAdPending } from '../../models/jobApproval';
 import { com_dash } from '../../models/dashboard';
+import { comJob } from '../../models/jobPost';
 
 @Injectable({
   providedIn: 'root'
@@ -73,4 +74,9 @@ export class ApiService {
   processedGetApplications(_data: com_dash) {
     return this.http.get<any>(this.baseUrl + 'TotalappCount'+'/'+_data._id,{withCredentials:true});
   }
+
+    //list all of APIs related company Job post
+    processedGetJobPosts(_data: comJob) {
+      return this.http.get<any>(this.baseUrl + 'add-display'+'/'+_data._id,{withCredentials:true});
+    }
 }

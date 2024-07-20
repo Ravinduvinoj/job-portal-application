@@ -45,6 +45,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { ApprovalProfileComponent } from './modules/admin/components/job-approval/components/approval-profile/approval-profile.component';
 import { PendingBoxComponent } from './modules/admin/components/job-approval/components/pending-box/pending-box.component';
 import { RemoveApprovalComponent } from './modules/admin/components/job-approval/components/remove-approval/remove-approval.component';
+import { AddPostComponent } from './modules/company/components/jobpost/components/add-post/add-post.component';
+import { AddDeleteComponent } from './modules/company/components/jobpost/components/add-delete/add-delete.component';
+import { PostProfileComponent } from './modules/company/components/jobpost/components/post-profile/post-profile.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +80,9 @@ import { RemoveApprovalComponent } from './modules/admin/components/job-approval
     ApprovalProfileComponent,
     PendingBoxComponent,
     RemoveApprovalComponent,
+    AddPostComponent,
+    AddDeleteComponent,
+    PostProfileComponent,
   ],
   imports: [
     NgToastModule,
