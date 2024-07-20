@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { addCategory, addSubCategory, allCategory, mainCategory, UpCategory, UpSubCategory } from '../../models/category';
 import { JobAdDelete, JobAdPending } from '../../models/jobApproval';
+import { com_dash } from '../../models/dashboard';
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,16 @@ export class ApiService {
   }
   processedAppJobPending(_data: JobAdPending) {
     return this.http.get<any>(this.baseUrl + 'temp/approve'+'/'+_data.jobid,{withCredentials:true});
+  }
+
+  //list all of APIs related company Dashboard
+  processedGetComAds(_data: com_dash) {
+    return this.http.get<any>(this.baseUrl + 'post/showcount'+'/'+_data._id,{withCredentials:true});
+  }
+  processedGetAdsListnings(_data: com_dash) {
+    return this.http.get<any>(this.baseUrl + 'appCountApproval'+'/'+_data._id,{withCredentials:true});
+  }
+  processedGetApplications(_data: com_dash) {
+    return this.http.get<any>(this.baseUrl + 'TotalappCount'+'/'+_data._id,{withCredentials:true});
   }
 }
