@@ -2,16 +2,15 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-add-delete',
-  templateUrl: './add-delete.component.html',
-  styleUrl: './add-delete.component.css'
+  selector: 'app-reject-dialog',
+  templateUrl: './reject-dialog.component.html',
+  styleUrl: './reject-dialog.component.css'
 })
-export class AddDeleteComponent {
-
+export class RejectDialogComponent {
   constructor(
-    public dialogRef: MatDialogRef<AddDeleteComponent>,
+    public dialogRef: MatDialogRef<RejectDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   onNoClick(): void {
     this.dialogRef.close(false);

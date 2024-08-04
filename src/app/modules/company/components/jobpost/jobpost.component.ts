@@ -1,12 +1,12 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { comJob } from '../../../../models/jobPost';
 import { ApiService } from '../../../../services/api-service/api.service';
 import * as XLSX from 'xlsx';
 import { AddPostComponent } from './components/add-post/add-post.component';
+import { StorageService } from '../../../../services/Storage/storage.service';
 
 
 @Component({
@@ -14,26 +14,26 @@ import { AddPostComponent } from './components/add-post/add-post.component';
   templateUrl: './jobpost.component.html',
   styleUrl: './jobpost.component.css'
 })
-export class JobpostComponent implements OnInit{
+export class JobpostComponent implements OnInit {
   private isBrowser: boolean = false;
   onShow: boolean = true;
   posts!: any[];
   loginID!: string;
-  constructor(
 
+  constructor(
     private router: Router,
-    private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private apiServe:ApiService,
+    private storageServe: StorageService,
+    private apiServe: ApiService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
-  ngOnInit(): void {
-    
-    this.updatetbl();
 
+  ngOnInit(): void {
+    this.updatetbl();
   }
+  
   updatetbl(): void {
     if (this.isBrowser) {
       let userID = localStorage?.getItem('_id');
@@ -45,15 +45,14 @@ export class JobpostComponent implements OnInit{
       this.apiServe.processedGetJobPosts(_obj).subscribe(data => {
         this.posts = data
         console.log(this.posts);
-      },error=>{
+      }, error => {
         console.error('Error fetching advertiesment:', error);
       })
-      }
-
+    }
   }
 
   onShowMore(post: any): void {
-    // this.post_prof.setJobData(post);
+    this.storageServe.setAddData(post);
     this.router.navigate(['/company/jobpost/post-profile']);
   }
 
@@ -61,7 +60,7 @@ export class JobpostComponent implements OnInit{
     return this.router.url === '/company/jobpost/post-profile';
   }
 
-  onAddEdit(data: any) {}
+  onAddEdit(data: any) { }
 
   filename = 'allAdvertiesments.xlsx';
   exportExcel(): void {
@@ -79,7 +78,6 @@ export class JobpostComponent implements OnInit{
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(data);
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-
     XLSX.writeFile(wb, this.filename);
   }
 

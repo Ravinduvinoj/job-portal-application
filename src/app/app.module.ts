@@ -48,6 +48,13 @@ import { RemoveApprovalComponent } from './modules/admin/components/job-approval
 import { AddPostComponent } from './modules/company/components/jobpost/components/add-post/add-post.component';
 import { AddDeleteComponent } from './modules/company/components/jobpost/components/add-delete/add-delete.component';
 import { PostProfileComponent } from './modules/company/components/jobpost/components/post-profile/post-profile.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatNativeDateModule } from '@angular/material/core';
+import { ApprovalComponent } from './modules/company/components/joblistnings/components/approval/approval.component';
+import { RejectDialogComponent } from './modules/company/components/joblistnings/components/reject-dialog/reject-dialog.component';
+import { ViewListningsComponent } from './modules/company/components/joblistnings/components/view-listnings/view-listnings.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +90,9 @@ import { PostProfileComponent } from './modules/company/components/jobpost/compo
     AddPostComponent,
     AddDeleteComponent,
     PostProfileComponent,
+    ApprovalComponent,
+    RejectDialogComponent,
+    ViewListningsComponent,
   ],
   imports: [
     NgToastModule,
@@ -101,6 +111,10 @@ import { PostProfileComponent } from './modules/company/components/jobpost/compo
     MatFormFieldModule,
     MatButtonModule,
     MatSelectModule,
+    MatDatepickerModule,
+    MatCardModule,
+    MatGridListModule,
+    MatNativeDateModule
 
   ],
   providers: [

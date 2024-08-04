@@ -18,6 +18,8 @@ import { authGuard } from './_guard/auth.guard';
 import { JobApprovalComponent } from './modules/admin/components/job-approval/job-approval.component';
 import { ApprovalProfileComponent } from './modules/admin/components/job-approval/components/approval-profile/approval-profile.component';
 import { PendingBoxComponent } from './modules/admin/components/job-approval/components/pending-box/pending-box.component';
+import { PostProfileComponent } from './modules/company/components/jobpost/components/post-profile/post-profile.component';
+import { ViewListningsComponent } from './modules/company/components/joblistnings/components/view-listnings/view-listnings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -48,15 +50,15 @@ const routes: Routes = [
       { path: '', redirectTo: '/company/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent,canActivate:[authGuard] },
       { path: 'joblistnings', component: JoblistningsComponent,canActivate:[authGuard],
-      //   children:[
-      //   {path:'view-listning',component:ViewListningsComponent}
-      // ] 
+        children:[
+        {path:'view-listning',component:ViewListningsComponent}
+      ] 
     },
       {
         path: 'jobpost', component: JobpostComponent,canActivate:[authGuard], 
-        // children: [
-        //   { path: 'post-profile', component: PostProfileComponent },
-        // ]
+        children: [
+          { path: 'post-profile', component: PostProfileComponent ,canActivate:[authGuard]},
+        ]
       },
       { path: 'schedule', component: ScheduleComponent ,canActivate:[authGuard]},
       // { path: 'plans', component: PlanComponent }
