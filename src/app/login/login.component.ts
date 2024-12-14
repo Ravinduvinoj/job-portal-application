@@ -96,31 +96,32 @@ export class LoginComponent implements OnInit {
       console.log(_obj)
 
       this.userService.Proceedlogin(_obj).subscribe(items => {
-        this._response = items
-
-        console.log(this._response)
+        this._response = items;
+        console.log(this._response);
+      
         if (this.isBrowser) {
-          window.localStorage.setItem('token', this._response.token);
-          window.localStorage.setItem('email', this._response.data.email);
-          window.localStorage.setItem('_id', this._response.data._id);
-          window.localStorage.setItem('userRole', this._response.userRole);
-          window.localStorage.setItem('company', this._response.data.company);
-
-          //check role base
-          if (this._response.userRole === "admin") {
-            this.router.navigate(['/admin/admin-dashboard']);
-          } else if (this._response.userRole === "company") {
-            this.router.navigate(['/company/dashboard']);
+          if (this._response && this._response.email && this._response.token) {
+            window.localStorage.setItem('token', this._response.token);
+            window.localStorage.setItem('email', this._response.email);  // Changed from _response.data.email
+            window.localStorage.setItem('_id', this._response._id);  // Changed from _response.data._id
+            window.localStorage.setItem('userRole', this._response.userRole);
+            window.localStorage.setItem('company', this._response.company);  // Changed from _response.data.company
+      
+            // Check role base
+            if (this._response.userRole === "admin") {
+              this.router.navigate(['/admin/admin-dashboard']);
+            } else if (this._response.userRole === "company") {
+              this.router.navigate(['/company/dashboard']);
+            }
+          } else {
+            this.toastr.error('Failed to login', 'Missing data');
           }
-
         } else {
           this.toastr.error('Failed to login', 'null local storage');
         }
-
       }, error => {
         this.toastr.error('Failed to login', error.error.message);
-      }
-      )
+      });
 
     }
   }
