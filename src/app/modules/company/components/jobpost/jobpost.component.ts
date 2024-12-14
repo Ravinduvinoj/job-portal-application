@@ -7,6 +7,7 @@ import { ApiService } from '../../../../services/api-service/api.service';
 import * as XLSX from 'xlsx';
 import { AddPostComponent } from './components/add-post/add-post.component';
 import { StorageService } from '../../../../services/Storage/storage.service';
+import { environment } from '../../../../../environments/environment.development';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class JobpostComponent implements OnInit {
   onShow: boolean = true;
   posts!: any[];
   loginID!: string;
+  baseImageUrl = environment.imageUrl
 
   constructor(
     private router: Router,
