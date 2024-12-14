@@ -1,0 +1,21 @@
+{
+  "routes": [
+    "/admin",
+    "/admin/accounts",
+    "/admin/admin-dashboard",
+    "/admin/j-category",
+    "/admin/jobapproval",
+    "/admin/jobapproval/pending",
+    "/admin/jobapproval/post-profile",
+    "/company",
+    "/company/dashboard",
+    "/company/joblistnings",
+    "/company/joblistnings/view-listning",
+    "/company/jobpost",
+    "/company/jobpost/post-profile",
+    "/company/schedule",
+    "/home",
+    "/login",
+    "/register"
+  ]
+}
