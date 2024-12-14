@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../../../../../../services/api-service/api.service';
 import { JobAdPending } from '../../../../../../models/jobApproval';
+import { environment } from '../../../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-pending-box',
@@ -11,7 +12,8 @@ import { JobAdPending } from '../../../../../../models/jobApproval';
 export class PendingBoxComponent {
 
   posts!: any[];
-
+  baseImageUrl = environment.imageUrl;
+  
   constructor(
     private Toast: ToastrService,
     private apiServe: ApiService

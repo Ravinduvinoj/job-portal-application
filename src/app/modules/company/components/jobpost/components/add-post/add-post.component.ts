@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ApiService } from '../../../../../../services/api-service/api.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { isPlatformBrowser } from '@angular/common';
+import { environment } from '../../../../../../../environments/environment.development';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class AddPostComponent implements OnInit {
   selectedCategoryId: string | undefined;
   selectedSubCategoryId: string | undefined;
   subcategoryName!: string;
+  baseUrl = environment.apiUrl;
 
   selectedFile!: File;
   loginID!: string | null;
@@ -96,7 +98,7 @@ export class AddPostComponent implements OnInit {
   onCategorySelectionChange(event: any): void {
     this.selectedCategoryId = event.value;
     console.log('Selected Category ID:', this.selectedCategoryId);
-    const apiUrl = `http://localhost:5000/api/getselectedmaincategory/${this.selectedCategoryId}`; // Update the API URL as per your backend route
+    const apiUrl = `${this.baseUrl}getselectedmaincategory/${this.selectedCategoryId}`; // Update the API URL as per your backend route
 
     this.http.get<any[]>(apiUrl).subscribe(
       (data) => {
@@ -154,7 +156,7 @@ export class AddPostComponent implements OnInit {
       formData.append("image", post.image);
 
       console.log(post);
-      this.http.post(`http://localhost:5000/api/add-post`, formData, {
+      this.http.post(`${this.baseUrl}add-post`, formData, {
         withCredentials: true
       
       })

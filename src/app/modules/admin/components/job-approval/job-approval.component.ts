@@ -4,6 +4,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { ApiService } from '../../../../services/api-service/api.service';
 import { StorageService } from '../../../../services/Storage/storage.service';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-job-approval',
@@ -13,6 +14,7 @@ import { StorageService } from '../../../../services/Storage/storage.service';
 export class JobApprovalComponent implements OnInit{
   posts!: any[];
   onShow: boolean = true;
+  baseImageUrl = environment.imageUrl;
 
   constructor(
     private apiServe:ApiService,

@@ -5,6 +5,7 @@ import { RemoveApprovalComponent } from '../remove-approval/remove-approval.comp
 import { StorageService } from '../../../../../../services/Storage/storage.service';
 import { JobAdDelete } from '../../../../../../models/jobApproval';
 import { ApiService } from '../../../../../../services/api-service/api.service';
+import { environment } from '../../../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-approval-profile',
@@ -14,7 +15,7 @@ import { ApiService } from '../../../../../../services/api-service/api.service';
 export class ApprovalProfileComponent implements OnInit {
 
   post: any = null;
-
+  baseImageUrl = environment.imageUrl;
   constructor(
     private Toast: ToastrService,
     private storage: StorageService,
